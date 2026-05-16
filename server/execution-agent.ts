@@ -47,6 +47,20 @@ function extractAccounts(input: unknown): string[] {
   return [...accounts];
 }
 
+function isBrowserFillTool(toolName: string): boolean {
+  const shortName = toolName.split("__").pop() ?? toolName;
+  return shortName === "browser_fill";
+}
+
+export function redactToolInputForLog(toolName: string, input: unknown): unknown {
+  if (!isBrowserFillTool(toolName)) return input;
+  if (!input || typeof input !== "object" || Array.isArray(input)) return input;
+  return {
+    ...(input as Record<string, unknown>),
+    text: "[redacted]",
+  };
+}
+
 const EXECUTION_SYSTEM = `You are a focused background worker for the user.
 
 Your job:
@@ -58,6 +72,12 @@ Research discipline:
 - Prefer WebSearch for fresh/factual questions. WebFetch when you need the content of a known URL.
 - Cite real URLs only — NEVER invent sources. If a page failed to load, say so.
 - Cross-check when it matters: one search is rarely enough for a claim.
+
+Local browser:
+- If the optional "browser" integration is loaded, Local browser use is enabled and it controls a local Patchright Chrome profile on the user's machine.
+- Use browser tools only when native integrations or WebFetch/WebSearch are insufficient: login-only portals, JS-heavy apps, visual workflows, or services likely to detect bots.
+- If you hit a login, MFA, or bot wall and the task requires the user's session, call browser_request_login. It opens a visible local Chrome instance and returns the exact handoff message to show the user.
+- After browser_request_login, stop and tell the user what to do next. Do not claim the task is complete until they confirm they logged in.
 
 MANDATORY: for any task that used WebSearch or WebFetch, end your response with
 a "Sources:" section listing the ACTUAL URLs you fetched or found. Example:
@@ -182,12 +202,13 @@ export async function spawnExecutionAgent(opts: SpawnExecutionAgentOpts): Promis
         const accounts = extractAccounts(input);
         const acctSuffix = accounts.length ? ` [${accounts.join(", ")}]` : "";
         logAgent(`tool: ${toolShort}${acctSuffix}`);
+        const logInput = redactToolInputForLog(toolName, input);
         await convex.mutation(api.agents.addLog, {
           agentId,
           logType: "tool_use",
           toolName,
           ...(accounts.length ? { accounts } : {}),
-          content: JSON.stringify(input).slice(0, 2000),
+          content: JSON.stringify(logInput).slice(0, 2000),
         });
         broadcast("agent_tool", { agentId, toolName, accounts });
       },

@@ -16,6 +16,8 @@ import { createComposioRouter } from "./composio-routes.js";
 import { ensureProactiveWatcher } from "./proactive-email.js";
 import { preloadLocalModel } from "./embeddings.js";
 import { createMemoryRouter } from "./memory-routes.js";
+import { createBrowserRouter } from "./browser-routes.js";
+import { closeLocalBrowser } from "./browser/launcher.js";
 import { createChangelogRouter } from "./changelog.js";
 import {
   getRuntimeConfig,
@@ -109,7 +111,7 @@ async function main() {
         const effort = resolveReasoningEffortInput(String(body.reasoningEffort));
         if (!effort) {
           res.status(400).json({
-            error: `Unknown reasoning effort "${String(body.reasoningEffort)}"`,
+            error: `Unknown Codex reasoning effort "${String(body.reasoningEffort)}"`,
           });
           return;
         }
@@ -125,6 +127,7 @@ async function main() {
   app.use("/sendblue", createSendblueRouter());
   app.use("/composio", createComposioRouter());
   app.use("/memory", createMemoryRouter());
+  app.use("/browser", createBrowserRouter());
   app.use("/changelog", createChangelogRouter());
 
   app.post("/agents/:id/cancel", (req, res) => {
@@ -189,6 +192,18 @@ async function main() {
     console.log(`  sendblue    POST http://localhost:${port}/sendblue/webhook`);
     console.log(`  websocket   WS   ws://localhost:${port}/ws`);
   });
+
+  const signalExitCodes = { SIGTERM: 143, SIGINT: 130, SIGHUP: 129 } as const;
+  let shuttingDown = false;
+  for (const sig of ["SIGTERM", "SIGINT", "SIGHUP"] as const) {
+    process.on(sig, () => {
+      if (shuttingDown) return;
+      shuttingDown = true;
+      closeLocalBrowser()
+        .catch(() => undefined)
+        .finally(() => process.exit(signalExitCodes[sig]));
+    });
+  }
 }
 
 main().catch((err) => {
