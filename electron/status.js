@@ -111,9 +111,9 @@ function displayMessage(status) {
     status.state === "stopped" &&
     (/^ngrok\s+│/.test(message) || /Listener closed|accept failed|session closed/.test(message))
   ) {
-    return "Boop is stopped.";
+    return "Scrollbuddy is stopped.";
   }
-  return message || "Waiting for Boop.";
+  return message || "Waiting for Scrollbuddy.";
 }
 
 function render(status) {
@@ -133,10 +133,10 @@ function render(status) {
     status.state === "setup-required"
       ? "Setup required"
       : starting
-        ? "Starting Boop"
+        ? "Starting Scrollbuddy"
         : status.state === "error"
-          ? "Boop stopped"
-          : "Boop is stopped";
+          ? "Scrollbuddy stopped"
+          : "Scrollbuddy is stopped";
 
   if (dashboardReady) {
     showDashboard(status.dashboardUrl);
@@ -198,7 +198,7 @@ function optimisticForAction(action) {
       registeredWebhookUrl: "",
       webhookDetails: "",
       webhookCheckedAt: "",
-      lastMessage: "Boop is stopped.",
+      lastMessage: "Scrollbuddy is stopped.",
     };
   }
 
@@ -213,7 +213,7 @@ function optimisticForAction(action) {
     registeredWebhookUrl: "",
     webhookDetails: "",
     webhookCheckedAt: "",
-    lastMessage: action === "restart" ? "Restarting Boop." : "Starting Boop.",
+    lastMessage: action === "restart" ? "Restarting Scrollbuddy." : "Starting Scrollbuddy.",
   };
 }
 
