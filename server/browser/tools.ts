@@ -16,6 +16,7 @@ import {
 } from "./launcher.js";
 import { createSocialTools } from "./social-tools.js";
 import { createTiktokTools } from "./tiktok-tools.js";
+import { createYoutubeTools } from "./youtube-tools.js";
 
 const MCP_NAMESPACE = "browser";
 const RUNTIME_NAMESPACE = "local_browser";
@@ -143,6 +144,7 @@ export function createBrowserTools(namespace = RUNTIME_NAMESPACE): RuntimeTool[]
     ),
     ...createSocialTools(namespace),
     ...createTiktokTools(namespace),
+    ...createYoutubeTools(namespace),
   ];
 }
 
