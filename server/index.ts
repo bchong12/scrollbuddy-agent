@@ -30,6 +30,7 @@ import {
   setRuntimeProvider,
 } from "./runtime-config.js";
 import { startImageCleanup } from "./images/clean.js";
+import { isPublicServerRequest, isTrustedLocalRequest } from "./local-access.js";
 
 async function main() {
   await loadIntegrations();
@@ -55,6 +56,13 @@ async function main() {
   }
 
   const app = express();
+  app.use((req, res, next) => {
+    if (isPublicServerRequest(req) || isTrustedLocalRequest(req)) {
+      next();
+      return;
+    }
+    res.status(404).json({ error: "not found" });
+  });
   app.use(cors());
   // Composio webhook receiver must read raw bytes for HMAC verification, so
   // its body parser is mounted BEFORE the global express.json. Without this
@@ -181,7 +189,11 @@ async function main() {
 
   const server = createServer(app);
   const wss = new WebSocketServer({ server, path: "/ws" });
-  wss.on("connection", (ws) => {
+  wss.on("connection", (ws, request) => {
+    if (!isTrustedLocalRequest(request)) {
+      ws.close(1008, "local connections only");
+      return;
+    }
     addClient(ws);
     ws.send(JSON.stringify({ event: "hello", data: { ok: true }, at: Date.now() }));
   });

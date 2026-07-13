@@ -15,7 +15,7 @@ export const LOCAL_MESSAGES_UNSUPPORTED_MESSAGE =
   "Local iMessage reads are only available on macOS.";
 
 export const LOCAL_MESSAGES_FULL_DISK_ACCESS_MESSAGE =
-  "Boop needs Full Disk Access for the terminal app running the server to read Messages. Open System Settings → Privacy & Security → Full Disk Access, add your terminal or Codex app, then restart npm run dev.";
+  "Boop needs Full Disk Access to read Messages. In System Settings → Privacy & Security → Full Disk Access, add Boop for the desktop app or your terminal for npm run dev, then restart Boop.";
 
 export type LocalMessagesPermission = "granted" | "denied" | "notDetermined";
 
