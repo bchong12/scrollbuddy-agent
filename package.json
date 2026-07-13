@@ -77,8 +77,8 @@
     "vitest": "^4.1.10"
   },
   "build": {
-    "appId": "com.raroque.boop",
-    "productName": "Boop",
+    "appId": "com.scrollbuddy.agent",
+    "productName": "Scrollbuddy",
     "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
     "asar": false,
     "files": [
