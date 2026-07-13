@@ -25,7 +25,7 @@ import { ConsolidationPanel } from "./components/ConsolidationPanel.js";
 import { SettingsPanel } from "./components/SettingsPanel.js";
 import { ChangelogDrawer } from "./components/ChangelogDrawer.js";
 import { RuntimeProviderLogo, type RuntimeProvider } from "./lib/branding.js";
-import boopGif from "../../assets/boop.gif";
+import boriGif from "../../assets/bori.gif";
 
 type View =
   | "dashboard"
@@ -505,7 +505,7 @@ function ConnectionHeader({
           isDark ? "hover:bg-white/5" : "hover:bg-white/70"
         }`}
       >
-        <img src={boopGif} alt="Boop" className="h-8 w-8 rounded-2xl object-cover" />
+        <img src={boriGif} alt="Boop" className="h-8 w-8 rounded-2xl object-cover" />
         <div className="min-w-0">
           <h1 className={`truncate text-sm font-semibold ${isDark ? "text-zinc-100" : "text-zinc-950"}`}>
             Boop

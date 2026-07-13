@@ -167,8 +167,8 @@ function getRuntimeRoot() {
 function getIconPath() {
   const root = runtimeRoot || getRuntimeRoot();
   const candidates = [
-    path.join(root, "assets", "boop-app-icon.png"),
-    path.join(root, "assets", "boop.png"),
+    path.join(root, "assets", "bori-app-icon.png"),
+    path.join(root, "assets", "bori.png"),
     path.join(root, "debug", "public", "appicon.png"),
   ];
   return candidates.find((candidate) => fs.existsSync(candidate)) || candidates[0];

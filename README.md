@@ -12,7 +12,7 @@ Scrollbuddy is a fork of **[Boop](https://github.com/raroque/boop-agent)** (MIT)
 ---
 
 <p align="center">
-  <img src="assets/boop.gif" alt="Boop" width="220" />
+  <img src="assets/bori.gif" alt="Bori" width="220" />
 </p>
 
 # Boop
@@ -109,14 +109,14 @@ Built on:
 ## Why is it named Boop?
 
 <p align="center">
-  <img src="assets/luna.jpeg" alt="Luna" width="220" />
+  <img src="assets/bori.png" alt="Bori" width="220" />
   <br>
-  <sub><em>Luna, the inspiration.</em></sub>
+  <sub><em>Bori, the inspiration.</em></sub>
 </p>
 
 Boop is meant to be a proactive agent — one that nudges you over iMessage with reminders, drafts, and little follow-ups. A small "boop" whenever it has something for you.
 
-And it's named after my dog, Luna, who gives plenty of them.
+And it's named after my dog, Bori, who gives plenty of them.
 
 ---
 
@@ -189,7 +189,7 @@ Text your Sendblue-provisioned number from a **different** phone. The agent repl
 ### Native App
 
 <p align="center">
-  <img src="assets/boop-app-icon.png" alt="Boop desktop app icon" width="96" />
+  <img src="assets/bori-app-icon.png" alt="Bori desktop app icon" width="96" />
 </p>
 
 Boop also has an experimental dedicated desktop app for people who want to launch it from the Dock instead of keeping a terminal open. The app starts the same stack as `npm run dev`, embeds the debug dashboard when everything is ready, and gives you start, stop, restart, and server-status controls directly in the app. The dashboard's Connection header is where you can see the running server, Convex, dashboard, tunnel, Sendblue webhook registration, Convex URL, and the Sendblue number people should text.

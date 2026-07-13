@@ -114,7 +114,7 @@
     "mac": {
       "category": "public.app-category.productivity",
       "identity": null,
-      "icon": "assets/boop.icns",
+      "icon": "assets/bori.icns",
       "target": [
         "dmg",
         "zip"
