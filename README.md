@@ -2,20 +2,18 @@
 
 A personal AI agent you text from **iMessage** that scrolls **Instagram, TikTok, and YouTube** for you. Ask *"what's going on in my latest post?"* and it opens the post and reads the comments back to you.
 
-Scrollbuddy is a fork of **[Boop](https://github.com/raroque/boop-agent)** (MIT) with two additions:
+Scrollbuddy is based on **[Boop](https://github.com/raroque/boop-agent)** (MIT), retooled for social media. Two main additions:
 
 - **Free iMessage via [BlueBubbles](https://bluebubbles.app)** — a self-hosted iMessage bridge instead of a paid SMS service. Set `BOOP_TRANSPORT=bluebubbles` and point the BlueBubbles webhook at `/bluebubbles/webhook`.
 - **Social feed reading** — a persistent, logged-in local browser (Patchright) exposes `social_scroll` (Instagram/TikTok/YouTube feeds) and `instagram_latest_post` (a profile's newest post + comments). Log in once; the session persists.
 
-**Quick start:** `cp .env.example .env.local`, fill it in, run `npx convex dev` once, then `npm run dev`. Full architecture and setup docs (inherited from Boop) follow below.
+**Quick start:** `cp .env.example .env.local`, fill it in, run `npx convex dev` once, then `npm run dev`. Full architecture and setup docs follow below.
 
 ---
 
 <p align="center">
   <img src="assets/bori.gif" alt="Bori" width="220" />
 </p>
-
-# Boop
 
 An iMessage-based personal agent you can run with either your Claude Code subscription or your Codex / ChatGPT subscription.
 
@@ -26,12 +24,12 @@ Choose your runtime during setup:
 
 No Anthropic or OpenAI API key is required for the agent runtime when using subscription auth.
 
-📺 **Watch the walkthrough:** [YouTube — How I built Boop](https://youtu.be/ZpmKjDDbqHs)
+📺 **Watch the walkthrough:** [YouTube — How I built Scrollbuddy](https://youtu.be/ZpmKjDDbqHs)
 
 <p align="center">
-  <img src="assets/imessage.jpg" alt="Boop replying inside iMessage" width="320" />
+  <img src="assets/imessage.jpg" alt="Scrollbuddy replying inside iMessage" width="320" />
   <br>
-  <sub><em>Boop in action — text it like a person, get back an answer with full context.</em></sub>
+  <sub><em>Scrollbuddy in action — text it like a person, get back an answer with full context.</em></sub>
 </p>
 
 > **This is a starting point, not a finished product.**
@@ -68,30 +66,30 @@ Built on:
 - **Composio-powered integrations** — one API key unlocks 1000+ toolkits. Connect Gmail, Slack, GitHub, Linear, Notion, Drive, HubSpot, etc. with a click from the debug dashboard. Composio handles OAuth + token refresh.
 - **Optional local browser use** — when enabled in Settings, spawned agents can use a Patchright-backed Chrome profile for login-required services, visual workflows, or pages that reject ordinary automation.
 - **Optional local Apple data** — Mac-only, read-only iMessage, Apple Notes, and Apple Reminders connectors that stay off until you enable Apple data and connect each source in the debug dashboard.
-- **Debug dashboard** (React + Vite) with a Boop mascot — Dashboard (usage, known cost, tokens, agent status), Agents (timeline + integration logos), Automations, Memory (table + force-directed graph), Events, Connections.
+- **Debug dashboard** (React + Vite) with a Scrollbuddy mascot — Dashboard (usage, known cost, tokens, agent status), Agents (timeline + integration logos), Automations, Memory (table + force-directed graph), Events, Connections.
 - **Convex** for persistence — real-time, typed, free tier.
 - **Uses your Claude Code or Codex/ChatGPT subscription** — choose during setup, with no separate provider API key required.
 
 <p align="center">
-  <img src="assets/agents-view.jpg" alt="Agents view in the Boop debug dashboard" width="900" />
+  <img src="assets/agents-view.jpg" alt="Agents view in the Scrollbuddy debug dashboard" width="900" />
   <br>
   <sub><em>Agents tab — every spawned sub-agent with status, usage/cost, tokens, turns, runtime, and the integrations it touched.</em></sub>
 </p>
 
 <p align="center">
-  <img src="assets/automations.jpg" alt="Automations view in the Boop debug dashboard" width="900" />
+  <img src="assets/automations.jpg" alt="Automations view in the Scrollbuddy debug dashboard" width="900" />
   <br>
   <sub><em>Automations tab — schedule recurring jobs from a text ("every morning at 8 summarize my calendar") and watch them run.</em></sub>
 </p>
 
 <p align="center">
-  <img src="assets/memory-graph.jpg" alt="Memory graph in the Boop debug dashboard" width="900" />
+  <img src="assets/memory-graph.jpg" alt="Memory graph in the Scrollbuddy debug dashboard" width="900" />
   <br>
   <sub><em>Memory tab — force-directed graph of clustered memories across short, long, and permanent tiers. Tabular view also available.</em></sub>
 </p>
 
 <p align="center">
-  <img src="assets/connections.jpg" alt="Connections view in the Boop debug dashboard" width="900" />
+  <img src="assets/connections.jpg" alt="Connections view in the Scrollbuddy debug dashboard" width="900" />
   <br>
   <sub><em>Connections tab — Composio toolkits with OAuth handled for you. Click Connect and the agent can use it on the next message.</em></sub>
 </p>
@@ -106,7 +104,7 @@ Built on:
 
 ---
 
-## Why is it named Boop?
+## Why is it named Scrollbuddy?
 
 <p align="center">
   <img src="assets/bori.png" alt="Bori" width="220" />
@@ -114,7 +112,7 @@ Built on:
   <sub><em>Bori, the inspiration.</em></sub>
 </p>
 
-Boop is meant to be a proactive agent — one that nudges you over iMessage with reminders, drafts, and little follow-ups. A small "boop" whenever it has something for you.
+Scrollbuddy is meant to be a proactive agent — one that nudges you over iMessage with reminders, drafts, and little follow-ups. A small "boop" whenever it has something for you.
 
 And it's named after my dog, Bori, who gives plenty of them.
 
@@ -136,7 +134,7 @@ You need accounts for these. Keep the tabs open — setup will ask for credentia
 
 | Service | Why | Free? | Discount code |
 |---|---|---|---|
-| [Claude Code](https://claude.com/code?ref=chrisraroque) or Codex / ChatGPT | Powers the agent. Install the matching CLI, sign in once, Boop uses your local session. | Subscription required | Working on getting one (if you work here, please reach out!) |
+| [Claude Code](https://claude.com/code?ref=chrisraroque) or Codex / ChatGPT | Powers the agent. Install the matching CLI, sign in once, Scrollbuddy uses your local session. | Subscription required | Working on getting one (if you work here, please reach out!) |
 | [Sendblue](https://sendblue.com/?utm_source=raroque) | iMessage bridge. Get a number, grab API keys. | Free on their agent plan | `RAROQUE20` — 20% off for 6 months (helpful if you plan to commercialize) |
 | [Convex](https://convex.link/chrisraroque) | Database + realtime. | Free tier is plenty | Working on getting one (in touch with them 👀) |
 | [Composio](https://composio.dev/?utm_source=chris&utm_medium=youtube&utm_campaign=collab) | Integrations — one API key unlocks ~1000 toolkits. Optional if you just want chat + memory + automations without third-party access. | Free tier covers personal use | `CHRISXCOMPOSIO` — 1 month free on starter plan |
@@ -144,7 +142,7 @@ You need accounts for these. Keep the tabs open — setup will ask for credentia
 
 **Custom integrations welcome.** Composio covers the common catalog, but you're free to add your own MCP servers under `server/integrations/` and register them in `server/integrations/registry.ts` — the dispatcher treats them the same as Composio-backed ones (just named toolkits the execution agent can spawn against). Useful for in-house APIs, local tools, or anything Composio doesn't ship.
 
-**Local browser use is fully optional.** Boop can expose a local Chrome/Chromium profile to spawned agents, but it is off by default. Enable it from the debug dashboard under **Settings → Local browser use** when you want browser automation for login-only services, visual workflows, or bot-wall-sensitive pages. The Patchright browser binary is installed only if you opt in during setup or click the install button in Settings.
+**Local browser use is fully optional.** Scrollbuddy can expose a local Chrome/Chromium profile to spawned agents, but it is off by default. Enable it from the debug dashboard under **Settings → Local browser use** when you want browser automation for login-only services, visual workflows, or bot-wall-sensitive pages. The Patchright browser binary is installed only if you opt in during setup or click the install button in Settings.
 
 ---
 
@@ -152,8 +150,8 @@ You need accounts for these. Keep the tabs open — setup will ask for credentia
 
 ```bash
 # 1. Clone + install
-git clone https://github.com/raroque/boop-agent.git
-cd boop-agent
+git clone https://github.com/bchong12/scrollbuddy-agent.git
+cd scrollbuddy-agent
 npm install
 
 # 2. Install one agent runtime (one-time, global) and sign in
@@ -182,7 +180,7 @@ Public URL:        https://<abc123>.ngrok.app
 Sendblue webhook:  https://<abc123>.ngrok.app/sendblue/webhook
 ```
 
-Boop synchronizes the signed Sendblue webhook on every boot, whether the public URL rotates or stays stable. No manual dashboard paste should be needed.
+Scrollbuddy synchronizes the signed Sendblue webhook on every boot, whether the public URL rotates or stays stable. No manual dashboard paste should be needed.
 
 Text your Sendblue-provisioned number from a **different** phone. The agent replies.
 
@@ -192,9 +190,9 @@ Text your Sendblue-provisioned number from a **different** phone. The agent repl
   <img src="assets/bori-app-icon.png" alt="Bori desktop app icon" width="96" />
 </p>
 
-Boop also has an experimental dedicated desktop app for people who want to launch it from the Dock instead of keeping a terminal open. The app starts the same stack as `npm run dev`, embeds the debug dashboard when everything is ready, and gives you start, stop, restart, and server-status controls directly in the app. The dashboard's Connection header is where you can see the running server, Convex, dashboard, tunnel, Sendblue webhook registration, Convex URL, and the Sendblue number people should text.
+Scrollbuddy also has an experimental dedicated desktop app for people who want to launch it from the Dock instead of keeping a terminal open. The app starts the same stack as `npm run dev`, embeds the debug dashboard when everything is ready, and gives you start, stop, restart, and server-status controls directly in the app. The dashboard's Connection header is where you can see the running server, Convex, dashboard, tunnel, Sendblue webhook registration, Convex URL, and the Sendblue number people should text.
 
-**Important:** `npm run setup` does not build or install the desktop app. It configures the checkout you are standing in: it creates or updates `.env.local`, walks through the runtime choice, configures Sendblue, creates or reuses the Convex deployment, generates Convex files, and offers optional local browser support. You still need to run setup at least once before Boop can run. If you want the installed app to run by itself, use `npm run desktop:setup`; that command runs the same interactive setup inside the app's runtime folder.
+**Important:** `npm run setup` does not build or install the desktop app. It configures the checkout you are standing in: it creates or updates `.env.local`, walks through the runtime choice, configures Sendblue, creates or reuses the Convex deployment, generates Convex files, and offers optional local browser support. You still need to run setup at least once before Scrollbuddy can run. If you want the installed app to run by itself, use `npm run desktop:setup`; that command runs the same interactive setup inside the app's runtime folder.
 
 ```bash
 npm run desktop:setup  # recommended: setup app runtime, build app, optionally copy to /Applications
@@ -206,14 +204,14 @@ npm run desktop:dist   # build unsigned distributables
 | Command | What happens | Installs the app? |
 |---|---|---|
 | `npm run setup` | Configures this checkout for terminal/dev use. Writes `.env.local`, configures Sendblue, sets up Convex, generates Convex files, and can install optional browser support. | No |
-| `npm run desktop:setup` | Prepares the app runtime folder, runs the same interactive setup there, builds the app, and on macOS offers to copy `Boop.app` to `/Applications`. | Yes, if you accept the `/Applications` prompt |
+| `npm run desktop:setup` | Prepares the app runtime folder, runs the same interactive setup there, builds the app, and on macOS offers to copy `Scrollbuddy.app` to `/Applications`. | Yes, if you accept the `/Applications` prompt |
 | `npm run desktop:dev` | Experimental developer runner. Opens the desktop app from this checkout and uses this checkout's setup files. | No |
 | `npm run desktop:pack` | Creates an unsigned app bundle under `dist/` for local testing. | No, it only builds |
 | `npm run desktop:dist` | Creates unsigned distributable artifacts. | No, it only builds |
 
-The app keeps secrets and local state out of the app bundle. For an installed macOS app, `.env.local`, `.convex`, generated Convex files, and local data live under `~/Library/Application Support/Boop/runtime`. The app bundle contains the runnable project and the Boop app icon; the runtime folder contains the machine-specific setup. The optional local BGE-large embedding model is not bundled either: setup downloads about 1.3GB into the runtime's `data/` folder when you choose it. Only health checks and provider webhook routes are exposed through the public tunnel; dashboard, browser-control, and local configuration routes remain local to your Mac.
+The app keeps secrets and local state out of the app bundle. For an installed macOS app, `.env.local`, `.convex`, generated Convex files, and local data live under `~/Library/Application Support/Scrollbuddy/runtime`. The app bundle contains the runnable project and the Scrollbuddy app icon; the runtime folder contains the machine-specific setup. The optional local BGE-large embedding model is not bundled either: setup downloads about 1.3GB into the runtime's `data/` folder when you choose it. Only health checks and provider webhook routes are exposed through the public tunnel; dashboard, browser-control, and local configuration routes remain local to your Mac.
 
-> **ngrok's free plan gives you a new URL every time.** Boop automatically registers the new Sendblue webhook when `npm run dev` or the desktop app starts, so you should not need to paste it manually. If texts stop arriving, run `npm run sendblue:webhook:check` to compare Sendblue's registration with the active tunnel.
+> **ngrok's free plan gives you a new URL every time.** Scrollbuddy automatically registers the new Sendblue webhook when `npm run dev` or the desktop app starts, so you should not need to paste it manually. If texts stop arriving, run `npm run sendblue:webhook:check` to compare Sendblue's registration with the active tunnel.
 >
 > If you're going to run this for more than a quick demo, **strongly recommend one of:**
 > - **ngrok paid plan** — gives you a reserved domain that stays the same forever
@@ -230,7 +228,7 @@ The app keeps secrets and local state out of the app bundle. For an installed ma
 
 ## How the Sendblue integration works
 
-Boop uses the [Sendblue CLI](https://github.com/sendblue-api/sendblue-cli) (`@sendblue/cli`) to eliminate almost all manual dashboard work. These NPM scripts wrap it:
+Scrollbuddy uses the [Sendblue CLI](https://github.com/sendblue-api/sendblue-cli) (`@sendblue/cli`) to eliminate almost all manual dashboard work. These NPM scripts wrap it:
 
 | Command | What it does |
 |---|---|
@@ -264,7 +262,7 @@ The banner will look like:
 
 ```
 ════════════════════════════════════════════════════════════════════
-  Boop is ready — ngrok tunnel is live.
+  Scrollbuddy is ready — ngrok tunnel is live.
 
   🐶 Debug dashboard (click me):   http://localhost:5173
   🌐 Public URL:                   https://abc123.ngrok-free.app
@@ -367,16 +365,16 @@ Deep dive: [ARCHITECTURE.md](./ARCHITECTURE.md). Adding your own tools: [INTEGRA
 
 Skills are reusable playbooks — `SKILL.md` files that teach execution agents how to do a specific kind of task (write a YouTube script, draft a cold email, plan a trip, etc.).
 
-Boop now has two runtime paths, so keep this distinction in mind:
+Scrollbuddy now has two runtime paths, so keep this distinction in mind:
 
 - Claude runtime: the Claude Agent SDK loads project skills from `.claude/skills/` when the execution agent boots.
-- Codex runtime: Boop keeps Codex-facing skills under `.agents/skills/`, while the core sub-agent loop, memory tools, draft tools, and integration tools are provided through Boop's runtime adapter.
+- Codex runtime: Scrollbuddy keeps Codex-facing skills under `.agents/skills/`, while the core sub-agent loop, memory tools, draft tools, and integration tools are provided through Scrollbuddy's runtime adapter.
 
-For capabilities that must work under both providers, keep the skill instructions mirrored in both directories or move the behavior into Boop's runtime tools/prompts. This applies to both runtime skills and upgrade/migration skills referenced from `CHANGELOG.md`. The dispatcher never loads skills directly; only spawned execution agents should do real work.
+For capabilities that must work under both providers, keep the skill instructions mirrored in both directories or move the behavior into Scrollbuddy's runtime tools/prompts. This applies to both runtime skills and upgrade/migration skills referenced from `CHANGELOG.md`. The dispatcher never loads skills directly; only spawned execution agents should do real work.
 
 Wiring (in `server/execution-agent.ts`):
 - Claude runs with `settingSources: ["project"]` and `"Skill"` in `allowedTools`.
-- Codex runs through `codex app-server` with Boop's dynamic runtime tools.
+- Codex runs through `codex app-server` with Scrollbuddy's dynamic runtime tools.
 
 **To add a cross-runtime skill or migration:** create matching files:
 
@@ -402,7 +400,7 @@ Examples included: `.claude/skills/youtube-script-writer/`, `.agents/skills/yout
 
 ## Choosing Claude Code or Codex
 
-`npm run setup` asks which subscription-backed runtime Boop should use:
+`npm run setup` asks which subscription-backed runtime Scrollbuddy should use:
 
 - Claude Code subscription: uses the Claude Agent SDK and the credentials Claude Code writes to your machine when you sign in. You do not need an `ANTHROPIC_API_KEY`.
 - Codex / ChatGPT subscription: uses the local Codex app-server runtime and the credentials `codex login` writes to your machine. You do not need an `OPENAI_API_KEY` for the agent runtime.
@@ -417,7 +415,7 @@ For Codex:
 
 - Install once: `npm install -g @openai/codex`
 - Run `codex login` in a terminal, sign in.
-- Boop reads that local auth. Set `BOOP_CODEX_AUTH_HOME` only if you need a custom Codex home.
+- Scrollbuddy reads that local auth. Set `BOOP_CODEX_AUTH_HOME` only if you need a custom Codex home.
 
 If you'd prefer Claude API-key billing (e.g. for a deployed server), set `ANTHROPIC_API_KEY` in `.env.local` and the Claude SDK will use it instead. The Codex runtime path uses local Codex subscription auth.
 
@@ -436,7 +434,7 @@ Everything lives in `.env.local` (auto-created by `npm run setup`). See `.env.ex
 | `BOOP_RUNTIME` | no | `claude` by default. Set `codex` to use local `codex app-server` with the ChatGPT/Codex account from `codex login`. |
 | `BOOP_MODEL` | no | Default `claude-sonnet-4-6`. Used as the fallback when no runtime override is set. The user can switch the model at runtime from iMessage ("use opus", "switch to sonnet") via the `set_model` self-tool — that override is stored in the Convex `settings` table and takes precedence over this env var. |
 | `BOOP_CODEX_MODEL` / `BOOP_CODEX_REASONING_EFFORT` | no | Codex defaults when `BOOP_RUNTIME=codex`. Defaults: `gpt-5.5` and `medium`. |
-| `BOOP_CODEX_AUTH_HOME` | no | Optional path to a Codex home containing `auth.json`; otherwise Boop uses the current `codex login` auth. |
+| `BOOP_CODEX_AUTH_HOME` | no | Optional path to a Codex home containing `auth.json`; otherwise Scrollbuddy uses the current `codex login` auth. |
 | `BOOP_BROWSER_ENABLED` | no | Fallback for Local browser use. Default `false`. Runtime settings in Convex take precedence once changed from the dashboard. |
 | `BOOP_BROWSER_PROFILE_DIR` | no | Persistent Chrome profile directory. Default `~/.boop/browser-profile`. |
 | `BOOP_BROWSER_SHOW_UI` | no | `true` opens a visible Chrome window; `false` runs hidden/headless. Default `true`. |
@@ -468,7 +466,7 @@ How it works:
 4. Turn on **Spawn login instance** only when you want the agent to hand control to you for login or MFA. The agent will say: "I need you to log in first. I’ve spawned an instance on your machine."
 5. Use **Install Patchright browser** if Patchright has not installed its browser binary yet.
 
-The browser uses a persistent Chrome/Chromium profile, so cookies and login state can carry across runs. Boop does not store third-party service passwords or OAuth tokens for this feature; those live in the local browser profile you choose. The `browser_fill` tool redacts typed values before agent tool-use logs are stored. Settings are stored in Convex under the `settings` table, with `.env.local` values used only as fallbacks.
+The browser uses a persistent Chrome/Chromium profile, so cookies and login state can carry across runs. Scrollbuddy does not store third-party service passwords or OAuth tokens for this feature; those live in the local browser profile you choose. The `browser_fill` tool redacts typed values before agent tool-use logs are stored. Settings are stored in Convex under the `settings` table, with `.env.local` values used only as fallbacks.
 
 Browser control HTTP routes are local-only. Requests forwarded through a public tunnel are rejected, so your ngrok/Sendblue URL cannot launch, close, or install a local browser.
 
@@ -478,7 +476,7 @@ For Codex runtime, local browser tools are exposed internally under the `local_b
 
 ## Local Apple data
 
-Local Apple data is optional, Mac-only, and read-only. It is designed for private single-user local runs where you want Boop to answer questions about data already on the Mac running the server.
+Local Apple data is optional, Mac-only, and read-only. It is designed for private single-user local runs where you want Scrollbuddy to answer questions about data already on the Mac running the server.
 
 It is off by default in two layers:
 
@@ -487,30 +485,30 @@ It is off by default in two layers:
 
 Turn it on from the debug dashboard, either in the browser during local development or inside the desktop app:
 
-1. Start Boop locally with `npm run dev`, or open the Boop desktop app.
+1. Start Scrollbuddy locally with `npm run dev`, or open the Scrollbuddy desktop app.
 2. Open `http://localhost:5173`, or use the embedded dashboard in the desktop app.
 3. Go to **Connections → Local Mac**.
-4. Click **Connect** only for the sources you want Boop to read.
+4. Click **Connect** only for the sources you want Scrollbuddy to read.
 5. Use **Disconnect** to turn any source off again.
 
 You can also view the overall Apple status from **Settings → Apple data**. Dashboard changes are stored in Convex's `settings` table and override `.env.local` fallbacks. The env vars in `.env.example` are useful for first-run defaults, but they are not required.
 
 | Source | Permission | Notes |
 |---|---|---|
-| iMessage / SMS history | Full Disk Access for the app or process running Boop, such as Boop.app for desktop runs | Reads `~/Library/Messages/chat.db` locally through `/usr/bin/sqlite3`. |
+| iMessage / SMS history | Full Disk Access for the app or process running Scrollbuddy, such as Scrollbuddy.app for desktop runs | Reads `~/Library/Messages/chat.db` locally through `/usr/bin/sqlite3`. |
 | Apple Notes | macOS Automation permission for Notes | Uses `/usr/bin/osascript` and exposes search/read tools only. |
 | Apple Reminders | macOS Automation permission for Reminders | Uses `/usr/bin/osascript` and exposes list tools only. |
 | Apple Calendar | Optional Apple bridge | Calendar events are not read by the local server path in this repo. |
 
 The control routes for local Apple data are localhost-only; public tunnel traffic cannot enable or disable local Apple access. Tool output is redacted before it reaches the agent/user: phone numbers and contact handles are hidden in Apple outputs, replies, and outgoing iMessage/log paths.
 
-On non-macOS machines, Local Mac connection cards are hidden or report unavailable. Composio integrations and the rest of Boop continue to work normally.
+On non-macOS machines, Local Mac connection cards are hidden or report unavailable. Composio integrations and the rest of Scrollbuddy continue to work normally.
 
 ---
 
 ## Integrations, via Composio
 
-Boop outsources 3rd-party service integrations to [Composio](https://composio.dev/?utm_source=chris&utm_medium=youtube&utm_campaign=collab). One API key unlocks ~1000 toolkits (Gmail, Slack, GitHub, Linear, Notion, Drive, Stripe, Supabase, HubSpot, Salesforce, Granola, and so on). Composio hosts the OAuth apps, manages token refresh, and exposes every toolkit as tools Boop can adapt for either runtime. Boop never sees an access token.
+Scrollbuddy outsources 3rd-party service integrations to [Composio](https://composio.dev/?utm_source=chris&utm_medium=youtube&utm_campaign=collab). One API key unlocks ~1000 toolkits (Gmail, Slack, GitHub, Linear, Notion, Drive, Stripe, Supabase, HubSpot, Salesforce, Granola, and so on). Composio hosts the OAuth apps, manages token refresh, and exposes every toolkit as tools Scrollbuddy can adapt for either runtime. Scrollbuddy never sees an access token.
 
 ### Quickstart
 
@@ -526,7 +524,7 @@ After a successful connect, the agent can use that toolkit immediately — no re
 
 ### How it wires in
 
-Boop keeps the dispatcher / executor split intact. Composio sits under the executor:
+Scrollbuddy keeps the dispatcher / executor split intact. Composio sits under the executor:
 
 ```
 interaction-agent:  spawn_agent(task, integrations: ["gmail", "slack"])
@@ -572,15 +570,15 @@ Every LLM call — dispatcher turn, execution-agent run, memory extraction, proa
 
 Claude runtime: `total_cost_usd` comes from the Claude Agent SDK's `result` message, so Dashboard cost tiles and per-agent cards show real dollar amounts that should match Anthropic billing.
 
-Codex runtime: `codex app-server` exposes token counts but not your actual subscription bill. Boop records `billingMode=codex-subscription`, stores the token counts, and estimates `costUsd` from OpenAI's published standard API token prices. Treat Codex dashboard spend as an API-equivalent usage proxy, not a bill.
+Codex runtime: `codex app-server` exposes token counts but not your actual subscription bill. Scrollbuddy records `billingMode=codex-subscription`, stores the token counts, and estimates `costUsd` from OpenAI's published standard API token prices. Treat Codex dashboard spend as an API-equivalent usage proxy, not a bill.
 
 ### A note on runaway usage
 
-Boop's Claude SDK `query()` calls don't currently set `maxTurns` or `maxBudgetUsd`. Those are hard stops the Claude SDK exposes — set them and the agent aborts once the threshold hits, with whatever partial result it has. Codex subscription runs do not currently have the same dollar-budget stop because the app-server path exposes token counts, and Boop's Codex dollar amounts are estimates derived from those counts.
+Scrollbuddy's Claude SDK `query()` calls don't currently set `maxTurns` or `maxBudgetUsd`. Those are hard stops the Claude SDK exposes — set them and the agent aborts once the threshold hits, with whatever partial result it has. Codex subscription runs do not currently have the same dollar-budget stop because the app-server path exposes token counts, and Scrollbuddy's Codex dollar amounts are estimates derived from those counts.
 
 Kept as-is intentionally for a single-user personal agent: every task is scoped tight (spawned by the dispatcher with a specific task string + a small integration list), integrations are Composio-scoped per spawn so the tool surface stays small, and the existing 15-minute heartbeat (`server/heartbeat.ts`) marks any long-running agent as `failed` and aborts it. In practice execution agents complete in under 60 seconds.
 
-If you deploy Boop in a higher-throughput setting, or hand it integrations that allow looping (webhooks, scrapers), add runtime-specific caps before opening it up to more users.
+If you deploy Scrollbuddy in a higher-throughput setting, or hand it integrations that allow looping (webhooks, scrapers), add runtime-specific caps before opening it up to more users.
 
 ### Keeping it in sync
 
@@ -593,7 +591,7 @@ Upgrade path when upstream ships changes: open Codex or Claude in the repo and r
 ## Project layout
 
 ```
-boop-agent/
+scrollbuddy-agent/
 ├── server/
 │   ├── index.ts                   # Express + WS + HTTP routes
 │   ├── sendblue.ts                # iMessage webhook, reply, typing indicator
@@ -662,7 +660,7 @@ boop-agent/
 
 ## Upgrading
 
-Boop is a fork-and-own template. You customize your copy freely — system prompts, memory thresholds, extra tools — and pull upstream fixes in on your own schedule.
+Scrollbuddy is a fork-and-own template. You customize your copy freely — system prompts, memory thresholds, extra tools — and pull upstream fixes in on your own schedule.
 
 The intended path is **agent CLI-driven**:
 
@@ -685,7 +683,7 @@ claude
 6. Parses `CHANGELOG.md` for `[BREAKING]` entries and offers to run the referenced migration skills.
 7. Prints a rollback hash + any env-var additions you should copy into `.env.local`.
 
-`/upgrade-boop` is for your local agent CLI operating on the repo. It is not exposed to the Boop SMS/web dispatcher. The Codex runtime used by Boop conversations runs with read-only sandboxing and no shell/file-write tools, so a text-message conversation cannot update the server.
+`/upgrade-boop` is for your local agent CLI operating on the repo. It is not exposed to the Scrollbuddy SMS/web dispatcher. The Codex runtime used by Scrollbuddy conversations runs with read-only sandboxing and no shell/file-write tools, so a text-message conversation cannot update the server.
 
 ### New-version notifications
 
