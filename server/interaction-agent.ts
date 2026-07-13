@@ -14,7 +14,7 @@ import {
   setRuntimeProvider,
 } from "./runtime-config.js";
 import { broadcast } from "./broadcast.js";
-import { sendImessage } from "./sendblue.js";
+import { sendImessage } from "./transport.js";
 import { defineRuntimeTool } from "./runtimes/tool.js";
 import { runAgentRuntime } from "./runtimes/index.js";
 import { runtimeText } from "./runtimes/types.js";
@@ -25,7 +25,15 @@ import {
 } from "./images/content-blocks.js";
 import { redactPhoneNumbers } from "./privacy.js";
 
-const INTERACTION_SYSTEM = `You are Boop, a personal agent the user texts from iMessage.
+const INTERACTION_SYSTEM = `You are Scrollbuddy, a personal agent the user texts from iMessage.
+
+Your signature skill is scrolling social feeds for the user. When they ask
+what is new on Instagram, TikTok, or YouTube (their home feed, a specific
+person, a hashtag, or their YouTube subscriptions), spawn a sub-agent with the
+"browser" integration and have it call social_scroll, then relay a tight,
+friendly summary. If the sub-agent hits a login wall, it should call
+browser_request_login and ask the user to sign in once; the login then
+persists in the local browser profile.
 
 You are a DISPATCHER, not a doer. Your job:
 1. Understand what the user wants.
@@ -187,12 +195,12 @@ optional Apple bridge.
 When "apple" is available and the user asks about their texts/iMessages,
 calendar, reminders, or notes, spawn_agent with integrations ["apple"]. If it
 is not available, tell the user to enable Apple data in Settings. For iMessage,
-the app or process running Boop needs Full Disk Access on macOS. For
+the app or process running Scrollbuddy needs Full Disk Access on macOS. For
 Apple Notes or Reminders, macOS may ask for permission to let that app control
 the relevant Apple app.
 
 Self-inspection (no spawn needed — answer instantly):
-When the user asks about Boop itself, pick the tool by intent:
+When the user asks about Scrollbuddy itself, pick the tool by intent:
 - Wants to know what model / config / time is currently in effect → get_config
 - Wants to switch providers/runtimes (Claude vs Codex) → set_runtime
 - Wants to switch models or change speed/quality tradeoff → set_model
@@ -202,7 +210,7 @@ When the user asks about Boop itself, pick the tool by intent:
 - Wondering whether some service is connectable at all → search_composio_catalog
 - Probing the actual capabilities of a specific connected integration
   (does Slack expose DMs? does Notion let me create databases?) → inspect_toolkit
-- Telling Boop where they are or what timezone they want → set_timezone
+- Telling Scrollbuddy where they are or what timezone they want → set_timezone
   (accepts IANA IDs or natural names like "central time" or city names)
 
 These are cheap and synchronous — no ack required. The user's phrasing
@@ -470,7 +478,7 @@ export async function handleUserMessage(opts: HandleOpts): Promise<string> {
     defineRuntimeTool(
       "boop-spawn",
       "spawn_agent",
-      "Spawn a focused sub-agent to do real work using external tools. Returns the agent's final answer. Use whenever the user's request needs external sources, current information, integrations, file/system access, or verification beyond the visible message context. If the current user message includes images and the sub-agent's task depends on them, pass the relevant storage IDs in imageRefs. On image turns, Boop attaches all current-turn images by default; a non-empty imageRefs list can narrow to a subset.",
+      "Spawn a focused sub-agent to do real work using external tools. Returns the agent's final answer. Use whenever the user's request needs external sources, current information, integrations, file/system access, or verification beyond the visible message context. If the current user message includes images and the sub-agent's task depends on them, pass the relevant storage IDs in imageRefs. On image turns, Scrollbuddy attaches all current-turn images by default; a non-empty imageRefs list can narrow to a subset.",
       {
         task: z
           .string()

@@ -268,7 +268,7 @@ export function createAppleTools(namespace = NAMESPACE): RuntimeTool[] {
       async ({ limit }) =>
         wrap(async () => {
           if (!(await messagesEnabled())) {
-            return "iMessage reads are disabled in Boop Connections. Turn on iMessage under Local Mac to use this tool.";
+            return "iMessage reads are disabled in Scrollbuddy Connections. Turn on iMessage under Local Mac to use this tool.";
           }
           const chats = await listChats(limit);
           if (chats.length === 0) return "No chats found.";
@@ -295,7 +295,7 @@ export function createAppleTools(namespace = NAMESPACE): RuntimeTool[] {
       async ({ chat_id, participant, query, since_hours, limit }) =>
         wrap(async () => {
           if (!(await messagesEnabled())) {
-            return "iMessage reads are disabled in Boop Connections. Turn on iMessage under Local Mac to use this tool.";
+            return "iMessage reads are disabled in Scrollbuddy Connections. Turn on iMessage under Local Mac to use this tool.";
           }
           const messages = await listMessages({
             chat_id,
@@ -358,7 +358,7 @@ export function createAppleTools(namespace = NAMESPACE): RuntimeTool[] {
       async ({ list, include_completed, due_within_days, limit }) =>
         wrap(async () => {
           if (!(await remindersEnabled())) {
-            return "Apple Reminders reads are disabled in Boop Connections. Turn on Apple Reminders under Local Mac to use this tool.";
+            return "Apple Reminders reads are disabled in Scrollbuddy Connections. Turn on Apple Reminders under Local Mac to use this tool.";
           }
           const reminders = await listReminders({
             list,
@@ -381,7 +381,7 @@ export function createAppleTools(namespace = NAMESPACE): RuntimeTool[] {
       async ({ query, limit }) =>
         wrap(async () => {
           if (!(await notesEnabled())) {
-            return "Apple Notes reads are disabled in Boop Connections. Turn on Apple Notes under Local Mac to use this tool.";
+            return "Apple Notes reads are disabled in Scrollbuddy Connections. Turn on Apple Notes under Local Mac to use this tool.";
           }
           const notes = await listNotes({ query, limit });
           if (notes.length === 0) return "No notes found.";
@@ -398,7 +398,7 @@ export function createAppleTools(namespace = NAMESPACE): RuntimeTool[] {
       async ({ note_id }) =>
         wrap(async () => {
           if (!(await notesEnabled())) {
-            return "Apple Notes reads are disabled in Boop Connections. Turn on Apple Notes under Local Mac to use this tool.";
+            return "Apple Notes reads are disabled in Scrollbuddy Connections. Turn on Apple Notes under Local Mac to use this tool.";
           }
           const note = await getNote(note_id);
           return `${redactPhoneNumbers(note.name)} (folder ${redactPhoneNumbers(note.folder)})\n\n${redactPhoneNumbers(note.body)}`;

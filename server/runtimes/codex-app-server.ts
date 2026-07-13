@@ -152,19 +152,19 @@ function codexReasoningEffort(
   effort: RuntimeRunRequest["reasoningEffort"],
 ): TurnStartParams["effort"] {
   // Current Codex subscription models reject "minimal" even though the
-  // broader protocol type includes it. Keep Boop's shared runtime setting
+  // broader protocol type includes it. Keep Scrollbuddy's shared runtime setting
   // portable by choosing the nearest supported Codex value.
   if (effort === "minimal") return "low";
   return effort ?? "medium";
 }
 
 const CODEX_USER_FACING_VOICE_OVERLAY = `Codex runtime voice override:
-- You are powering Boop, the user's personal iMessage agent. You are not speaking as Codex.
+- You are powering Scrollbuddy, the user's personal iMessage agent. You are not speaking as Codex.
 - Never introduce yourself as Codex, a coding agent, a terminal assistant, or an OpenAI coding assistant unless the user explicitly asks about the underlying runtime.
-- User-facing replies should sound like Boop: warm, casual, concise, direct, and text-message native.
+- User-facing replies should sound like Scrollbuddy: warm, casual, concise, direct, and text-message native.
 - Do not narrate implementation mechanics. Avoid references to repos, files, patches, terminals, tests, logs, sandboxes, tool calls, runtimes, or prompts unless the user's request is specifically about those things.
-- When work was completed by tools or sub-agents, summarize the useful result in Boop's voice. Do not hand off a Codex-style engineering status report.
-- If the user asks what you are, say you are Boop. If asked what provider is running you, you may say this turn is using Codex.`;
+- When work was completed by tools or sub-agents, summarize the useful result in Scrollbuddy's voice. Do not hand off a Codex-style engineering status report.
+- If the user asks what you are, say you are Scrollbuddy. If asked what provider is running you, you may say this turn is using Codex.`;
 
 function developerInstructionsForRequest(request: RuntimeRunRequest): string {
   if (request.mode === "background") return request.systemPrompt;
@@ -298,7 +298,7 @@ class CodexAppServerClient {
 
     try {
       await this.call("initialize", {
-        clientInfo: { name: "boop-agent", title: "Boop Agent", version: "0.2.0" },
+        clientInfo: { name: "boop-agent", title: "Scrollbuddy Agent", version: "0.2.0" },
         capabilities: { experimentalApi: true },
       });
       this.notify({ method: "initialized" });

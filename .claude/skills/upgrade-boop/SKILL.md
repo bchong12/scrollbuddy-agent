@@ -1,11 +1,11 @@
 ---
 name: upgrade-boop
-description: Pull upstream Boop changes into a customized fork. Previews, backs up, merges with conflict-aware resolution, validates, and surfaces breaking changes.
+description: Pull upstream Scrollbuddy changes into a customized fork. Previews, backs up, merges with conflict-aware resolution, validates, and surfaces breaking changes.
 ---
 
 # About
 
-Your Boop fork drifts from upstream as you customize it — system prompts tweaked, new automations, tuned memory thresholds, etc. This skill brings upstream changes in without blowing away those edits.
+Your Scrollbuddy fork drifts from upstream as you customize it — system prompts tweaked, new automations, tuned memory thresholds, etc. This skill brings upstream changes in without blowing away those edits.
 
 Run `/upgrade-boop` inside the repo from `claude`. This is the supported upgrade path: the agent previews the diff, creates rollback points, performs the merge, resolves conflicts when needed, and runs referenced migration skills.
 

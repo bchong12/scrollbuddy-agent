@@ -4,7 +4,7 @@
  * Convex vector index stays compatible regardless of which provider runs.
  *
  * Local fallback ensures `recall()` always works — no API key required.
- * First local call downloads ~1.3GB and caches under Boop's local data folder.
+ * First local call downloads ~1.3GB and caches under Scrollbuddy's local data folder.
  */
 
 import type { FeatureExtractionPipeline } from "@huggingface/transformers";

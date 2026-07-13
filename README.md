@@ -1,3 +1,16 @@
+# Scrollbuddy
+
+A personal AI agent you text from **iMessage** that scrolls **Instagram, TikTok, and YouTube** for you. Ask *"what's going on in my latest post?"* and it opens the post and reads the comments back to you.
+
+Scrollbuddy is a fork of **[Boop](https://github.com/raroque/boop-agent)** (MIT) with two additions:
+
+- **Free iMessage via [BlueBubbles](https://bluebubbles.app)** — a self-hosted iMessage bridge instead of a paid SMS service. Set `BOOP_TRANSPORT=bluebubbles` and point the BlueBubbles webhook at `/bluebubbles/webhook`.
+- **Social feed reading** — a persistent, logged-in local browser (Patchright) exposes `social_scroll` (Instagram/TikTok/YouTube feeds) and `instagram_latest_post` (a profile's newest post + comments). Log in once; the session persists.
+
+**Quick start:** `cp .env.example .env.local`, fill it in, run `npx convex dev` once, then `npm run dev`. Full architecture and setup docs (inherited from Boop) follow below.
+
+---
+
 <p align="center">
   <img src="assets/boop.gif" alt="Boop" width="220" />
 </p>

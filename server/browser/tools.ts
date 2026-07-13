@@ -14,6 +14,7 @@ import {
   launchLocalBrowser,
   openBrowserUrl,
 } from "./launcher.js";
+import { createSocialTools } from "./social-tools.js";
 
 const MCP_NAMESPACE = "browser";
 const RUNTIME_NAMESPACE = "local_browser";
@@ -139,6 +140,7 @@ export function createBrowserTools(namespace = RUNTIME_NAMESPACE): RuntimeTool[]
         }
       },
     ),
+    ...createSocialTools(namespace),
   ];
 }
 

@@ -34,7 +34,7 @@ function errorMessage(err: unknown): string {
 }
 
 function textOnlyImageFallback(text: string): string {
-  return `[user sent images, but Boop couldn't retrieve the stored image bytes. Continue using the text-only message; if image details are necessary, say the image could not be inspected.]\n${text}`;
+  return `[user sent images, but Scrollbuddy couldn't retrieve the stored image bytes. Continue using the text-only message; if image details are necessary, say the image could not be inspected.]\n${text}`;
 }
 
 export async function readCappedImageBytes(res: Response): Promise<Buffer> {

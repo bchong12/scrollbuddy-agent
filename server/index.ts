@@ -5,6 +5,8 @@ import { createServer } from "node:http";
 import { WebSocketServer } from "ws";
 import { addClient } from "./broadcast.js";
 import { createSendblueRouter } from "./sendblue.js";
+import { createBlueBubblesRouter } from "./bluebubbles.js";
+import { activeTransport } from "./transport.js";
 import { handleUserMessage } from "./interaction-agent.js";
 import { loadIntegrations } from "./integrations/registry.js";
 import { startCleanupLoop } from "./memory/clean.js";
@@ -133,7 +135,11 @@ async function main() {
     }
   });
 
-  app.use("/sendblue", createSendblueRouter());
+  if (activeTransport() === "bluebubbles") {
+    app.use("/bluebubbles", createBlueBubblesRouter());
+  } else {
+    app.use("/sendblue", createSendblueRouter());
+  }
   app.use("/composio", createComposioRouter());
   app.use("/memory", createMemoryRouter());
   app.use("/browser", createBrowserRouter());
@@ -203,7 +209,7 @@ async function main() {
     console.log(`boop-agent server listening on :${port}`);
     console.log(`  health      GET  http://localhost:${port}/health`);
     console.log(`  chat        POST http://localhost:${port}/chat`);
-    console.log(`  sendblue    POST http://localhost:${port}/sendblue/webhook`);
+    console.log(`  inbound     POST http://localhost:${port}/${activeTransport() === "bluebubbles" ? "bluebubbles" : "sendblue"}/webhook`);
     console.log(`  websocket   WS   ws://localhost:${port}/ws`);
   });
 
