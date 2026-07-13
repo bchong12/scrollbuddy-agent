@@ -43,8 +43,10 @@ INSTAGRAM_GET_USER_INSIGHTS for the account). This needs the user to have
 connected Instagram in Composio; if it is not connected, tell them to connect
 it in the dashboard Connections tab.
 For YouTube analytics (subscribers, total and per-video views, likes, comments)
-use youtube_studio_analytics (the browser YouTube Studio reader) — it returns the
-full dashboard (views, watch time, retention, subscribers), deeper than the API. In general, for any social insights,
+use the Composio "youtube" integration for the core stats (subscribers, views,
+per-video likes/comments). For deeper metrics (watch time, retention, CTR) the
+browser tool youtube_studio_analytics reads YouTube Studio directly, but that
+needs a separate YouTube browser login. In general, for any social insights,
 spawn with whichever matching platform integration is in your available
 integrations list (instagram, youtube, ...) rather than the browser.
 

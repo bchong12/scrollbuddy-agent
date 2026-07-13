@@ -7,6 +7,7 @@ import { addClient } from "./broadcast.js";
 import { createSendblueRouter } from "./sendblue.js";
 import { createBlueBubblesRouter } from "./bluebubbles.js";
 import { activeTransport } from "./transport.js";
+import { startImessagePoller } from "./imessage.js";
 import { handleUserMessage } from "./interaction-agent.js";
 import { loadIntegrations } from "./integrations/registry.js";
 import { startCleanupLoop } from "./memory/clean.js";
@@ -40,6 +41,7 @@ async function main() {
   startAutomationLoop();
   startHeartbeatLoop();
   startConsolidationLoop();
+  if (activeTransport() === "imessage") void startImessagePoller();
   startImageCleanup();
   // No-op when a paid embedding key is set; otherwise downloads/loads the
   // local BGE-large model in the background so the first user-facing
@@ -137,7 +139,7 @@ async function main() {
 
   if (activeTransport() === "bluebubbles") {
     app.use("/bluebubbles", createBlueBubblesRouter());
-  } else {
+  } else if (activeTransport() === "sendblue") {
     app.use("/sendblue", createSendblueRouter());
   }
   app.use("/composio", createComposioRouter());

@@ -400,3 +400,58 @@ function scanForNSString(bytes: Uint8Array): string | null {
   if (length <= 0 || index + length > bytes.length) return null;
   return new TextDecoder().decode(bytes.slice(index, index + length));
 }
+
+// --- Native iMessage transport support (inbound polling) ---
+
+interface RawInboundRow {
+  id: number;
+  handle: string;
+  chatGuid: string;
+  text: string | null;
+  attributedBodyHex: string | null;
+  hasAttachments: number;
+}
+
+export interface InboundMessage {
+  id: number;
+  handle: string;
+  chatGuid: string;
+  text: string;
+}
+
+// Highest message ROWID right now — used to start the poller so it only picks up
+// messages that arrive AFTER Scrollbuddy starts.
+export async function latestMessageRowId(): Promise<number> {
+  const rows = await runSql<{ id: number | null }>("SELECT MAX(ROWID) AS id FROM message");
+  return rows[0]?.id ?? 0;
+}
+
+// New INBOUND (is_from_me = 0) text messages with ROWID greater than sinceRowId.
+export async function readInboundSince(sinceRowId: number, limit = 50): Promise<InboundMessage[]> {
+  const rows = await runSql<RawInboundRow>(`
+    SELECT
+      m.ROWID AS id,
+      COALESCE(h.id, '') AS handle,
+      c.guid AS chatGuid,
+      m.text AS text,
+      hex(m.attributedBody) AS attributedBodyHex,
+      COALESCE(m.cache_has_attachments, 0) AS hasAttachments
+    FROM message m
+    JOIN chat_message_join cmj ON cmj.message_id = m.ROWID
+    JOIN chat c ON c.ROWID = cmj.chat_id
+    LEFT JOIN handle h ON h.ROWID = m.handle_id
+    WHERE m.ROWID > ${sqlInteger(sinceRowId)}
+      AND COALESCE(m.is_from_me, 0) = 0
+      AND COALESCE(m.associated_message_type, 0) = 0
+    ORDER BY m.ROWID ASC
+    LIMIT ${sqlInteger(capLimit(limit, 50))}
+  `);
+  return rows
+    .map((row) => ({
+      id: row.id,
+      handle: row.handle,
+      chatGuid: row.chatGuid,
+      text: resolveMessageText(row.text, row.attributedBodyHex, row.hasAttachments !== 0),
+    }))
+    .filter((m) => m.handle && m.text.trim());
+}
